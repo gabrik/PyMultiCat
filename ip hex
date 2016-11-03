@@ -1,0 +1,49 @@
+ricevuti
+
+4500
+0020
+628A
+4000
+4011
+4444 checksum
+0101
+FC21
+0101
+FC79
+
+3669B
+
+669E
+
+9961 NO SBAGLIATO 
+
+
+
+
+invitati
+
+4500
+0020
+628A
+4000
+4011
+4444 checksum   -> viene inserito un checksum sbagliato diverso da quello calcolato
+0101
+FC21
+0101
+FC79
+
+32257
+
+225A
+
+CHECKSUM DDA5 GIUSTO CALCOLATO ANCHE A MANO
+
+
+Proabile errore di conversione verso unsigned
+
+1000100000000011 8803
+0000000100000001 0101
+
+
+0011100000111000 3838x
