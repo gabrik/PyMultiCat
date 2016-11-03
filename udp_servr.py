@@ -211,10 +211,10 @@ def main():
 				#new_checksum=inet_utils.ip_checksum(new_ip_header,len(new_ip_header))
 
 				#ip_duplicate=struct.pack('!1s1s1H1H2s1B1B2s4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],new_checksum,iph[8],dupdst)
-				ip_duplicate=struct.pack('!1s1s1H1H2s1B1B2s4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],blank_checksum,iph[8],dupdst)
+				ip_pkt_no_chksum=struct.pack('!1s1s1H1H2s1B1B2s4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],blank_checksum,iph[8],dupdst)
 				
 				
-				ip_chksum_pkt = struct.unpack('!HHHHHHHHHH',ip_duplicate) 
+				ip_chksum_pkt = struct.unpack('!HHHHHHHHHH',ip_pkt_no_chksum) 
 
 				#code.interact(local=locals())
 				
@@ -243,28 +243,29 @@ def main():
 
 				chksum_pkt = pseudo_udp_pkt+udp_no_chk+data
 
-				udp_checksum=inet_utils.checksum_big_endian(chksum_pkt)
+				udp_checksum=inet_utils.checksum_little_endian(chksum_pkt)
 
 
 				
 				#str("%0.4X" % new_checksum)
 
-				ip_duplicate=struct.pack('!1s1s1H1H2s1B1B2s4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],str("%0.4X" % new_checksum),iph[8],dupdst)
+				#ip_duplicate=struct.pack('!1s1s1H1H2s1B1B2s4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],str("%0.4X" % new_checksum),iph[8],dupdst)
+				ip_duplicate=struct.pack('!1s1s1H1H2s1B1BH4s4s' , iph[0],iph[1],iph[2],iph[3],iph[4],iph[5],iph[6],new_checksum,iph[8],dupdst)
 				#print len(ip_duplicate)
 
-				ip_str=struct.unpack('!HHHHHHHHHH' , ip_duplicate)
+				#ip_str=struct.unpack('!HHHHHHHHHH' , ip_duplicate)
 				#print ("%0.4X" % ip_str[6])
 				
 				#in posizione 6 -> il checksum																		cheksum
-				ip_duplicate=struct.pack('!HHHHHHHHHH',ip_str[0],ip_str[1],ip_str[2],ip_str[3],ip_str[4],ip_str[5],new_checksum,ip_str[7],ip_str[8],ip_str[9])
+				#ip_duplicate=struct.pack('!HHHHHHHHHH',ip_str[0],ip_str[1],ip_str[2],ip_str[3],ip_str[4],ip_str[5],ip_str[6],ip_str[7],ip_str[8],ip_str[9])
 
-				i=0
-				for s in ip_str:
-					if i==5:
-						print ("%0.4X  *" % s)
-					else:
-						print ("%0.4X" % s)
-					i=i+1
+				#i=0
+				#for s in ip_str:
+				#	if i==5:
+				#		print ("%0.4X  *" % s)
+				#	else:
+				#		print ("%0.4X" % s)
+				#	i=i+1
 				
 
 

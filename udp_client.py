@@ -13,7 +13,7 @@ addr = (host,8001)
 sock = sck.socket(sck.AF_INET,sck.SOCK_DGRAM)
 print "Sending to " , host , PORT , MESSAGE
 
-while True:
-    print "Sending to " , HOST , PORT , MESSAGE
-    sock.sendto(MESSAGE, addr)
-    time.sleep(1)
+#while True:
+print "Sending to " , HOST , PORT , MESSAGE
+sock.sendto(MESSAGE, addr)
+time.sleep(1)
